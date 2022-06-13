@@ -30,13 +30,14 @@
 
         state = {name:"",pwd:""};
 
-       /* login = (event) =>{
+        login = (event) =>{
             event.preventDefault(); //阻止表单提交
-            console.log(this.name.value);
-            console.log(this.pwd.value);
-        }*/
+            console.log(this.state.name);
+            console.log(this.state.pwd);
+        }
 
         saveName = (event) =>{
+            console.log(event.target.value);
             this.setState({name:event.target.value});
         }
 
