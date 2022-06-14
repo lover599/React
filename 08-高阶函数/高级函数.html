@@ -34,26 +34,31 @@
 
         login = (event) =>{
             event.preventDefault(); //阻止表单提交
-            console.log(this.name.value);
-            console.log(this.pwd.value);
+            console.log(this.state.name);
+            console.log(this.state.pwd);
         }
  
         state = {name:"",pwd:""};
 
+        //以下为使用柯里化写法和回调函数写法的不同对应函数
         saveType = (type) =>{
             return (event) => {
                 this.setState({[type]:event.target.value});
             }
+        }
+        
+        saveType2 = (type, event) => {
+            this.setState({[type]:event.target.value});
         }
 
         
         //因为事件中必须是一个函数，所以返回的也是一个函数，这样就符合规范了
         render() {
             return (
-                <form action="http://www.baidu.com" >
+                <form action="http://www.baidu.com" onSubmit={this.login}>
                     用户名：<input onChange = {this.saveType('name')} type = "text" name ="username"/>
                     {/*直接调用回调函数也是可以的：将数据传递过去就可以*/}
-                    用户名：<input onChange = {(event)=>{this.saveType('name',event)}} type = "text" name ="username"/>
+                    用户名：<input onChange = {(event)=>{this.saveType2('name',event)}} type = "text" name ="username"/>
                     密码<input onChange = {this.saveType('pwd')} type = "password" name ="password"/>
                     <button>登录</button>
                 </form>

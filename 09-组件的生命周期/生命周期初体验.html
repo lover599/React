@@ -35,11 +35,15 @@
         state = {time:1};
 
         stop = () => {
+            //也可以使用该方法
+            // clearInterval(this.Inter);
             //卸载组件
             ReactDOM.unmountComponentAtNode(document.getElementById("div"))
           
         }
 
+        //setInterval不能写在render的原因:第一次渲染的时候开启了一个定时器，在一定时间内改状态
+        //但是render每次在修改状态后又会被调用，引起循环递归
         //在组建挂载(渲染之后进行)
         componentDidMount(){
             //定时器
@@ -53,11 +57,13 @@
             },200);
         }
 
-        //组件被卸载之后执行
+        //这些特殊函数能由react自动调用，自己定义的函数则不行
+        //组件将要被卸载之后执行
         componentWillUnmount(){
             clearInterval(this.Inter);
         }
 
+        //render调用的时机：初始化渲染，状态改变之后
         render(){
             return (
                 <div>
