@@ -60,6 +60,11 @@
         console.log("A --- componenetDidMount");
        }
 
+       //组建将要卸载
+       componentWillUnmonut(){
+            console.log("A --- componentWillUnmonut");
+       }
+
        //更新操作 setState之后执行，判断是否可以更新（true可以，false不可以）
        shouldComponentUpdate(){
             console.log("A --- shouldComponentUpdate");
@@ -74,10 +79,6 @@
             console.log("A --- componentDidUpdate");
        }
 
-       //卸载组件之后
-       componentWillUnmonut(){
-            console.log("A --- componentWillUnmonut");
-       }
      
    }
    class B extends React.Component{
