@@ -36,21 +36,23 @@
 
   class New extends React.Component{
 
-        state = {num:[]};
+        state = {newsArr:[]};
 
         //在组件创建之后
         componentDidMount(){
             setInterval(()=>{
-                let {num} = this.state;
-                const news = (num.length+1);
-                this.setState({num:[news,...num]});
+                let {newsArr} = this.state;
+                const news = (newsArr.length+1);
+                this.setState({newsArr:[news,...newsArr]});
             },2000);
         }
 
+        //在更新之前获取快照
         getSnapshotBeforeUpdate(){
             return this.refs.list.scrollHeight;
         }
 
+        //componentDidUpdate(preProps,preState,snapValue){
         componentDidUpdate(preProps,preState,height){
             this.refs.list.scrollTop += (this.refs.list.scrollHeight - height);
         }
@@ -59,7 +61,7 @@
             return (
 
                 <div ref = "list" className = "list">{
-                    this.state.num.map((n,index)=>{
+                    this.state.newsArr.map((n,index)=>{
                     return <div className="news" key={index} >新闻{n}</div>
                     })
                 }</div>
